@@ -1,5 +1,5 @@
 {
-  "name": "ts-sc-client",
+  "name": "ts-sc-client-ws",
   "version": "0.3.0",
   "description": "Core library to work with sc-memory from web browser",
   "main": "build/sc.js",
@@ -7,23 +7,30 @@
   "scripts": {
     "start": "webpack --progress --color --config webpack/webpack.dev.js",
     "build": "webpack --progress --color --config webpack/webpack.prod.js",
-    "test": "jest"
+    "test-mock": "jest tests/scClientMock.test.ts tests/scClientBase.test.ts",
+    "test-mock-coverage": "jest tests/scClientMock.test.ts tests/scClientBase.test.ts --collect-coverage",
+    "test-machine": "jest tests/scClientMachine.test.ts tests/scClientBase.test.ts",
+    "test-machine-coverage": "jest tests/scClientMachine.test.ts tests/scClientBase.test.ts --collect-coverage"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ostis-ai/ts-sc-client.git"
+    "url": "git+https://github.com/artrayme/ts-sc-client-ws.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ostis-ai/ts-sc-client/issues"
+    "url": "https://github.com/artrayme/ts-sc-client-ws/issues"
   },
   "files": [
     "build"
   ],
-  "homepage": "https://github.com/ostis-ai/ts-sc-client#readme",
+  "homepage": "https://github.com/artrayme/ts-sc-client-ws#readme",
+  "dependencies": {
+    "ws": "8.10.0"
+  },
   "devDependencies": {
     "@types/jest": "27.4.1",
+    "@types/ws": "^8.5.3",
     "jest": "27.5.1",
     "jest-websocket-mock": "2.3.0",
     "ts-jest": "27.1.4",

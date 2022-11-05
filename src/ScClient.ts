@@ -9,6 +9,7 @@ import { ScTemplateResult } from "./ScTemplateResult";
 import { ScType } from "./ScType";
 import { ScError, IEdge, ILink, INode, TCheckElementsArgs, TGetContentArgs, TSetContentArgs, TGetLinksArgs, TGetStringsArgs, TCreateElementsArgs, TCreateElementsBySCsArgs, TDeleteElementsArgs, TWSCallback, TAction, TKeynodesElementsArgs, TTemplateSearchArgs, TTripleItem, TTemplateGenerateArgs, TCreateEventArgs, TDeleteEventArgs } from "./types";
 import { transformEdgeInfo } from "./utils";
+import { WebSocket, MessageEvent } from "ws";
 
 export interface Response<T = any> {
   id: number;
@@ -29,7 +30,7 @@ interface KeynodeParam<ParamId extends string = string> {
   type: ScType;
 }
 
-type SocketEvent = "close" | "error" | "open";
+type SocketEvent = "message" | "close" | "error" | "open";
 
 export class ScClient {
   private _eventID: number;
@@ -50,11 +51,21 @@ export class ScClient {
   }
 
   public addEventListener(evt: SocketEvent, cb: () => void) {
-    this._socket.addEventListener(evt, cb);
+    switch (evt){
+      case "message": this._socket.addEventListener(evt, cb); break;
+      case "close": this._socket.addEventListener(evt, cb); break;
+      case "error": this._socket.addEventListener(evt, cb); break;
+      case "open": this._socket.addEventListener(evt, cb); break;
+    }
   }
 
   public removeEventListener(evt: SocketEvent, cb: () => void) {
-    this._socket.removeEventListener(evt, cb);
+    switch (evt){
+      case "message": this._socket.removeEventListener(evt, cb); break;
+      case "close": this._socket.removeEventListener(evt, cb); break;
+      case "error": this._socket.removeEventListener(evt, cb); break;
+      case "open": this._socket.removeEventListener(evt, cb); break;
+    }
   }
 
   private sendMessagesFromQueue = () => {
