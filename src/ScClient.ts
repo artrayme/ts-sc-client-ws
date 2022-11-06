@@ -9,7 +9,8 @@ import { ScTemplateResult } from "./ScTemplateResult";
 import { ScType } from "./ScType";
 import { ScError, IEdge, ILink, INode, TCheckElementsArgs, TGetContentArgs, TSetContentArgs, TGetLinksArgs, TGetStringsArgs, TCreateElementsArgs, TCreateElementsBySCsArgs, TDeleteElementsArgs, TWSCallback, TAction, TKeynodesElementsArgs, TTemplateSearchArgs, TTripleItem, TTemplateGenerateArgs, TCreateEventArgs, TDeleteEventArgs } from "./types";
 import { transformEdgeInfo } from "./utils";
-import { WebSocket, MessageEvent } from "ws";
+import WebSocket from "ws";
+
 
 export interface Response<T = any> {
   id: number;
@@ -73,7 +74,7 @@ export class ScClient {
     this._messageQueue = [];
   };
 
-  private onMessage = (messageEvent: MessageEvent) => {
+  private onMessage = (messageEvent: WebSocket.MessageEvent) => {
     const data = JSON.parse(messageEvent.data.toString()) as Response;
     const cmdID = data.id;
     const callback = this._callbacks[cmdID];
