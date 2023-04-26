@@ -1,0 +1,10 @@
+{
+    "extends": "./tsconfig.json",
+    "version": "1.6.2",
+    "compilerOptions": {
+        "moduleResolution": "NodeNext",
+        "outDir": "build/cmj",
+        "target": "ES2021",
+        "module": "esnext"
+    },
+}
