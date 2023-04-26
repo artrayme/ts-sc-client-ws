@@ -8,8 +8,8 @@
     ".": {
       "types": "./build/types/index.d.ts",
       "require": "./build/cjs/index.js",
-      "import": "./build/esm/esm.js",
-      "default": "./build/esm/esm.js"
+      "import": "./build/esm/index.js",
+      "default": "./build/esm/index.js"
     }
   },
   "scripts": {
